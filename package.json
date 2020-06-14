@@ -1,0 +1,26 @@
+{
+  "name": "rockeast",
+  "version": "1.0.0",
+  "description": "平时工作会用到的一些函数",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeishenKOBE/rock.js.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeishenKOBE/rock.js/issues"
+  },
+  "homepage": "https://github.com/LeishenKOBE/rock.js#readme",
+  "dependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
