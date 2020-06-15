@@ -1,6 +1,6 @@
 {
   "name": "rockeast",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "平时工作会用到的一些函数",
   "main": "./dist/index.js",
   "scripts": {
