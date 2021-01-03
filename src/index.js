@@ -3,7 +3,7 @@ export const getUuid = () => {
   var temp_url = URL.createObjectURL(new Blob());
   var uuid = temp_url.toString();
   URL.revokeObjectURL(temp_url);
-  return uuid.substr(uuid.lastIndexOf('/') + 1);
+  return uuid.substr(uuid.lastIndexOf("/") + 1);
 };
 // 判断是否是正整数
 export const isPositiveNum = (val) => {
@@ -35,7 +35,7 @@ export const getScrollPosition = (el = window) => {
 // 滚动到指定元素区域
 export const smoothScroll = (element) => {
   document.querySelector(element).scrollIntoView({
-    behavior: 'smooth',
+    behavior: "smooth",
   });
 };
 // 平滑滚动到页面顶部
@@ -48,8 +48,8 @@ export const scrollToTop = () => {
 };
 // http跳转https
 export const httpsRedirect = () => {
-  if (location.protocol !== 'https:')
-    location.replace('https://' + location.href.split('//')[1]);
+  if (location.protocol !== "https:")
+    location.replace("https://" + location.href.split("//")[1]);
 };
 // 检查页面底部是否可见
 export const bottomVisible = () => {
@@ -64,13 +64,13 @@ export const bottomVisible = () => {
 export function AutoResponse(width = 750) {
   const target = document.documentElement;
   target.clientWidth >= 600
-    ? (target.style.fontSize = '80px')
-    : (target.style.fontSize = (target.clientWidth / width) * 100 + 'px');
+    ? (target.style.fontSize = "80px")
+    : (target.style.fontSize = (target.clientWidth / width) * 100 + "px");
 }
 
 // 本地存储
 export const localStorageSet = (key, value) => {
-  if (typeof value === 'object') value = JSON.stringify(value);
+  if (typeof value === "object") value = JSON.stringify(value);
   localStorage.setItem(key, value);
 };
 
@@ -84,7 +84,7 @@ export const localStorageRemove = (key) => {
 };
 // localStorage 存贮某一段时间失效
 export const localStorageSetExpire = (key, value, expire) => {
-  if (typeof value === 'object') value = JSON.stringify(value);
+  if (typeof value === "object") value = JSON.stringify(value);
   localStorage.setItem(key, value);
   setTimeout(() => {
     localStorage.removeItem(key);
@@ -93,7 +93,7 @@ export const localStorageSetExpire = (key, value, expire) => {
 
 // sessionStorage 存贮
 export const sessionStorageSet = (key, value) => {
-  if (typeof value === 'object') value = JSON.stringify(value);
+  if (typeof value === "object") value = JSON.stringify(value);
   sessionStorage.setItem(key, value);
 };
 
@@ -110,7 +110,7 @@ export const sessionStorageRemove = (key) => {
 // sessionStorage 存贮某一段时间失效
 
 export const sessionStorageSetExpire = (key, value, expire) => {
-  if (typeof value === 'object') value = JSON.stringify(value);
+  if (typeof value === "object") value = JSON.stringify(value);
   sessionStorage.setItem(key, value);
   setTimeout(() => {
     sessionStorage.removeItem(key);
@@ -127,10 +127,10 @@ export const cookieSet = (key, value, expire) => {
 // cookie 获取
 export const cookieGet = (key) => {
   const cookieStr = unescape(document.cookie);
-  const arr = cookieStr.split('; ');
-  let cookieValue = '';
+  const arr = cookieStr.split("; ");
+  let cookieValue = "";
   for (let i = 0; i < arr.length; i++) {
-    const temp = arr[i].split('=');
+    const temp = arr[i].split("=");
     if (temp[0] === key) {
       cookieValue = temp[1];
       break;
@@ -147,7 +147,7 @@ export const cookieRemove = (key) => {
 // 金钱格式化，三位加逗号
 
 export const formatMoney = (num) =>
-  num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 // 获取文件base64编码
 
 /**
@@ -160,14 +160,14 @@ export const formatMoney = (num) =>
  */
 export function fileToBase64String(
   file,
-  format = ['jpg', 'jpeg', 'png', 'gif'],
+  format = ["jpg", "jpeg", "png", "gif"],
   size = 20 * 1024 * 1024,
-  formatMsg = '文件格式不正确',
-  sizeMsg = '文件大小超出限制'
+  formatMsg = "文件格式不正确",
+  sizeMsg = "文件大小超出限制"
 ) {
   return new Promise((resolve, reject) => {
     // 格式过滤
-    let suffix = file.type.split('/')[1].toLowerCase();
+    let suffix = file.type.split("/")[1].toLowerCase();
     let inFormat = false;
     for (let i = 0; i < format.length; i++) {
       if (suffix === format[i]) {
@@ -187,8 +187,8 @@ export function fileToBase64String(
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
       let res = fileReader.result;
-      resolve({base64String: res, suffix: suffix});
-      reject('异常文件，请重新选择');
+      resolve({ base64String: res, suffix: suffix });
+      reject("异常文件，请重新选择");
     };
   });
 }
@@ -200,19 +200,19 @@ export function fileToBase64String(
 export function formatFileSize(fileSize) {
   let temp;
   if (fileSize < 1024) {
-    return fileSize + 'B';
+    return fileSize + "B";
   } else if (fileSize < 1024 * 1024) {
     temp = fileSize / 1024;
     temp = temp.toFixed(2);
-    return temp + 'KB';
+    return temp + "KB";
   } else if (fileSize < 1024 * 1024 * 1024) {
     temp = fileSize / (1024 * 1024);
     temp = temp.toFixed(2);
-    return temp + 'MB';
+    return temp + "MB";
   } else {
     temp = fileSize / (1024 * 1024 * 1024);
     temp = temp.toFixed(2);
-    return temp + 'GB';
+    return temp + "GB";
   }
 }
 
@@ -222,16 +222,16 @@ export function formatFileSize(fileSize) {
  *  @param { string } filename 转换后的文件名
  */
 export const base64ToFile = (base64, filename) => {
-  let arr = base64.split(',');
+  let arr = base64.split(",");
   let mime = arr[0].match(/:(.*?);/)[1];
-  let suffix = mime.split('/')[1]; // 图片后缀
+  let suffix = mime.split("/")[1]; // 图片后缀
   let bstr = atob(arr[1]);
   let n = bstr.length;
   let u8arr = new Uint8Array(n);
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new File([u8arr], `${filename}.${suffix}`, {type: mime});
+  return new File([u8arr], `${filename}.${suffix}`, { type: mime });
 };
 
 // base64转blob
@@ -240,7 +240,7 @@ export const base64ToFile = (base64, filename) => {
  *  @param { base64 } base64
  */
 export const base64ToBlob = (base64) => {
-  let arr = base64.split(','),
+  let arr = base64.split(","),
     mime = arr[0].match(/:(.*?);/)[1],
     bstr = atob(arr[1]),
     n = bstr.length,
@@ -248,7 +248,7 @@ export const base64ToBlob = (base64) => {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new Blob([u8arr], {type: mime});
+  return new Blob([u8arr], { type: mime });
 };
 
 // blob转file
@@ -280,9 +280,9 @@ export const fileToBase64 = (file) => {
 export function getTreeData(
   data,
   pid,
-  pidName = 'parentId',
-  idName = 'id',
-  childrenName = 'children',
+  pidName = "parentId",
+  idName = "id",
+  childrenName = "children",
   key
 ) {
   let arr = [];
@@ -304,7 +304,7 @@ export function getTreeData(
   return arr;
 }
 // 遍历树节点
-export function foreachTree(data, childrenName = 'children', callback) {
+export function foreachTree(data, childrenName = "children", callback) {
   for (let i = 0; i < data.length; i++) {
     callback(data[i]);
     if (data[i][childrenName] && data[i][childrenName].length > 0) {
@@ -318,9 +318,9 @@ export function traceParentNode(
   pid,
   data,
   rootPid,
-  pidName = 'parentId',
-  idName = 'id',
-  childrenName = 'children'
+  pidName = "parentId",
+  idName = "id",
+  childrenName = "children"
 ) {
   let arr = [];
   foreachTree(data, childrenName, (node) => {
@@ -341,9 +341,9 @@ export function traceParentNode(
 export function traceChildNode(
   id,
   data,
-  pidName = 'parentId',
-  idName = 'id',
-  childrenName = 'children'
+  pidName = "parentId",
+  idName = "id",
+  childrenName = "children"
 ) {
   let arr = [];
   foreachTree(data, childrenName, (node) => {
@@ -364,10 +364,10 @@ export function traceChildNode(
  *  @param { * } id 数据中的id
  *  @param { * } link 生成树形结构的依据
  */
-export const createTree = (items, id = null, link = 'pid') => {
+export const createTree = (items, id = null, link = "pid") => {
   items
     .filter((item) => item[link] === id)
-    .map((item) => ({...item, children: createTree(items, item.id)}));
+    .map((item) => ({ ...item, children: createTree(items, item.id) }));
 };
 
 // 判断手机是Andoird还是IOS
@@ -380,7 +380,7 @@ export const createTree = (items, id = null, link = 'pid') => {
 export function getOSType() {
   let u = navigator.userAgent,
     app = navigator.appVersion;
-  let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+  let isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
   let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
   if (isIOS) {
     return 0;
@@ -463,16 +463,16 @@ export function throttle(func, wait, type) {
 export function type(target) {
   let ret = typeof target;
   let template = {
-    '[object Array]': 'array',
-    '[object Object]': 'object',
-    '[object Number]': 'number - object',
-    '[object Boolean]': 'boolean - object',
-    '[object String]': 'string-object',
+    "[object Array]": "array",
+    "[object Object]": "object",
+    "[object Number]": "number - object",
+    "[object Boolean]": "boolean - object",
+    "[object String]": "string-object",
   };
 
   if (target === null) {
-    return 'null';
-  } else if (ret == 'object') {
+    return "null";
+  } else if (ret == "object") {
     let str = Object.prototype.toString.call(target);
     return template[str];
   } else {
@@ -532,12 +532,12 @@ export function countOccurrences(arr, value) {
 export function add(arg1, arg2) {
   let r1, r2, m;
   try {
-    r1 = arg1.toString().split('.')[1].length;
+    r1 = arg1.toString().split(".")[1].length;
   } catch (e) {
     r1 = 0;
   }
   try {
-    r2 = arg2.toString().split('.')[1].length;
+    r2 = arg2.toString().split(".")[1].length;
   } catch (e) {
     r2 = 0;
   }
@@ -553,12 +553,12 @@ export function add(arg1, arg2) {
 export function sub(arg1, arg2) {
   let r1, r2, m, n;
   try {
-    r1 = arg1.toString().split('.')[1].length;
+    r1 = arg1.toString().split(".")[1].length;
   } catch (e) {
     r1 = 0;
   }
   try {
-    r2 = arg2.toString().split('.')[1].length;
+    r2 = arg2.toString().split(".")[1].length;
   } catch (e) {
     r2 = 0;
   }
@@ -575,17 +575,17 @@ export function sub(arg1, arg2) {
 export function division(num1, num2) {
   let t1, t2, r1, r2;
   try {
-    t1 = num1.toString().split('.')[1].length;
+    t1 = num1.toString().split(".")[1].length;
   } catch (e) {
     t1 = 0;
   }
   try {
-    t2 = num2.toString().split('.')[1].length;
+    t2 = num2.toString().split(".")[1].length;
   } catch (e) {
     t2 = 0;
   }
-  r1 = Number(num1.toString().replace('.', ''));
-  r2 = Number(num2.toString().replace('.', ''));
+  r1 = Number(num1.toString().replace(".", ""));
+  r2 = Number(num2.toString().replace(".", ""));
   return (r1 / r2) * Math.pow(10, t2 - t1);
 }
 // 乘法函数（精度丢失问题）
@@ -598,13 +598,13 @@ export function mcl(num1, num2) {
     s1 = num1.toString(),
     s2 = num2.toString();
   try {
-    m += s1.split('.')[1].length;
+    m += s1.split(".")[1].length;
   } catch (e) {}
   try {
-    m += s2.split('.')[1].length;
+    m += s2.split(".")[1].length;
   } catch (e) {}
   return (
-    (Number(s1.replace('.', '')) * Number(s2.replace('.', ''))) /
+    (Number(s1.replace(".", "")) * Number(s2.replace(".", ""))) /
     Math.pow(10, m)
   );
 }
@@ -652,13 +652,13 @@ export function trim(str, type = 1) {
   if (type && type !== 1 && type !== 2 && type !== 3 && type !== 4) return;
   switch (type) {
     case 1:
-      return str.replace(/\s/g, '');
+      return str.replace(/\s/g, "");
     case 2:
-      return str.replace(/(^\s)|(\s*$)/g, '');
+      return str.replace(/(^\s)|(\s*$)/g, "");
     case 3:
-      return str.replace(/(^\s)/g, '');
+      return str.replace(/(^\s)/g, "");
     case 4:
-      return str.replace(/(\s$)/g, '');
+      return str.replace(/(\s$)/g, "");
     default:
       return str;
   }
@@ -669,8 +669,8 @@ export function trim(str, type = 1) {
  * 方法一
  */
 export function hexColor() {
-  let str = '#';
-  let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+  let str = "#";
+  let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
   for (let i = 0; i < 6; i++) {
     let index = Number.parseInt((Math.random() * 16).toString());
     str += arr[index];
@@ -683,11 +683,11 @@ export const escapeHTML = (str) => {
     /[&<>'"]/g,
     (tag) =>
       ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;',
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
       }[tag] || tag)
   );
 };
@@ -696,15 +696,15 @@ export const detectDeviceType = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   )
-    ? 'Mobile'
-    : 'Desktop';
+    ? "Mobile"
+    : "Desktop";
 };
 // 隐藏所有指定标签
 /**
  * 例: hide(document.querySelectorAll('img'))
  */
 export const hideTag = (...el) =>
-  [...el].forEach((e) => (e.style.display = 'none'));
+  [...el].forEach((e) => (e.style.display = "none"));
 
 // 返回指定元素的生效样式
 /**
@@ -737,7 +737,7 @@ export const outOfNum = (val, maxNum) => {
 
 // 如何隐藏所有指定的元素
 export const hide = (el) =>
-  Array.from(el).forEach((e) => (e.style.display = 'none'));
+  Array.from(el).forEach((e) => (e.style.display = "none"));
 
 // 如何确定页面的浏览器选项卡是否聚焦？
 export const isBrowserTabFocused = () => !document.hidden;
@@ -761,3 +761,110 @@ export function flatten(arr, depth = -1) {
     []
   );
 }
+
+// 缓存函数，vuex的缓存方法来源于此
+export const cache = (fn) => {
+  const cacheInner = Object.create(null);
+  return function cachedFn(str) {
+    const hit = cacheInner[str];
+    return hit || (cacheInner[str] = fn(str));
+  };
+};
+
+// 原生bind的兼容性写法
+export const polyfillBind = (fn, ctx) => {
+  function boundFn(a) {
+    const l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx);
+  }
+  boundFn._length = fn.length;
+  return boundFn;
+};
+
+// 伪数组转真数组的方法
+export const toArray = (list, start) => {
+  start = start || 0;
+  let i = list.length - start;
+  const ret = new Array(i);
+  while (i--) {
+    ret[i] = list[i + start];
+  }
+  return ret;
+};
+
+// 代码混入
+export const extend = (to, _from) => {
+  for (let key in _from) {
+    to[key] = _from[key];
+  }
+  return to;
+};
+
+export const toObject = (arr) => {
+  const res = {};
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i]) {
+      extend(res, arr[i]);
+    }
+  }
+  return res;
+};
+
+export const isObject = (obj) => {
+  //判断是否是对象
+  return obj !== null && typeof obj === "object";
+};
+
+// 判断对象是否全等
+export const looseEquals = (a, b) => {
+  if (a === b) return true;
+  const isObjectA = isObject(a);
+  const isObjectB = isObject(b);
+  if (isObjectA && isObjectB) {
+    try {
+      const isArrayA = Array.isArray(a);
+      const isArrayB = Array.isArray(b);
+      if (isArrayA && isArrayB) {
+        return (
+          a.length === b.length &&
+          a.every((e, i) => {
+            return looseEquals(e, b[i]);
+          })
+        );
+      } else if (a instanceof Date && b instanceof Date) {
+        return a.getTime() === b.getTime();
+      } else if (!isArrayA && !isArrayB) {
+        const keysA = Object.keys(a);
+        const keysB = Object.keys(b);
+        return (
+          keysA.length === keysB.length &&
+          keysA.every((key) => {
+            return looseEquals(a[key], b[key]);
+          })
+        );
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  } else if (!isObjectA && !isObjectB) {
+    return String(a) === String(b);
+  } else {
+    return false;
+  }
+};
+// 只需要执行一次的函数
+export const once = (fn) => {
+  let called = false;
+  return function () {
+    if (!called) {
+      called = true;
+      fn.call(this, arguments);
+    }
+  };
+};
